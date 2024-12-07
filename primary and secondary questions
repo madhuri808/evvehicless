@@ -40,7 +40,6 @@ order by penetration_rate desc
 limit 5;
 
 
-
 for 4-wheeler
 
 select e.state , 
@@ -58,6 +57,35 @@ limit 5;
 Que 3)List the states with negative penetration (decline) in EV sales from 2022
 to 2024?
 
-query :-
+query :-with pct_change_previousyear as
+(
+select  e.state , (sum(electric_vehicles_sold)/sum(total_vehicles_sold)*100) as previoos_pent
+from electric_vehicle_sales_by_state e
+join dim_date d 
+on d.date = e.date
+where d.fiscal_year = 2023
+group by e.state 
+),
+pct_change_currentyear as
+(
+select  e.state , (sum(electric_vehicles_sold)/sum(total_vehicles_sold)*100) as current_pent
+from electric_vehicle_sales_by_state e
+join dim_date d 
+on d.date = e.date
+where d.fiscal_year = 2024
+group by e.state 
+)
+select c.state , c.current_pent - p.previoos_pent as pct_change
+from pct_change_previousyear p
+join pct_change_currentyear c 
+on p.state = c.state 
+where 
+c.current_pent - p.previoos_pent < 0
+order by pct_change;
+
+Que 4)What are the quarterly trends based on sales volume for the top 5 EV
+makers (4-wheelers) from 2022 to 2024?
+
+query:- 
 
 
