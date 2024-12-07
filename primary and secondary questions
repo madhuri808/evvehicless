@@ -104,4 +104,20 @@ order by quarter ,ev_sales desc;
 Que 5)How do the EV sales and penetration rates in Delhi compare to
 Karnataka for 2024?
 
+query :- select state ,  sum(electric_vehicles_sold) as ev_sales , 
+sum(total_vehicles_sold) as total_vehicle_sales ,
+round(sum(electric_vehicles_sold) / sum(total_vehicles_sold) *100,2) as penetration_rate 
+from electric_vehicle_sales_by_state e 
+join dim_date d on
+d.date = e.date
+where state in ("Delhi" ,"Karnataka") and
+fiscal_year = 2024
+group by state 
+order by state;
+
+Que 6)List down the compounded annual growth rate (CAGR) in 4-wheeler
+units for the top 5 makers from 2022 to 2024.
+
+query :- 
+
 
