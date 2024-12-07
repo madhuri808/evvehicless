@@ -26,6 +26,20 @@ limit 3;
 Que 2) Identify the top 5 states with the highest penetration rate in 2-wheeler
 and 4-wheeler EV sales in FY 2024.
 
-query :- 
+query :- select e.state , 
+concat(round(sum(electric_vehicles_sold)/sum(total_vehicles_sold )* 100,2),"%")as penetration_rate
+from electric_vehicle_sales_by_state e
+join dim_date d
+on d.date = e.date
+where fiscal_year = 2024
+and e.vehicle_category = "2-wheelers"
+group by e.state
+order by penetration_rate desc 
+limit 5;
+
+Que 3)List the states with negative penetration (decline) in EV sales from 2022
+to 2024?
+
+query :-
 
 
