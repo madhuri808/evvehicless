@@ -86,6 +86,22 @@ order by pct_change;
 Que 4)What are the quarterly trends based on sales volume for the top 5 EV
 makers (4-wheelers) from 2022 to 2024?
 
-query:- 
+query:- with cte1 as (
+select e.maker ,d.quarter ,
+sum(e.electric_vehicles_sold) as ev_sales,
+row_number() over(partition by d.quarter order by sum(e.electric_vehicles_sold) desc) as rnk
+from electric_vehicle_sales_by_makers e
+join dim_date d on
+d.date = e.date
+where e.vehicle_category = "4-Wheelers"
+group by e.maker ,d.quarter
+)
+select maker , quarter , ev_sales
+from cte1
+where rnk <= 5
+order by quarter ,ev_sales desc;
+
+Que 5)How do the EV sales and penetration rates in Delhi compare to
+Karnataka for 2024?
 
 
