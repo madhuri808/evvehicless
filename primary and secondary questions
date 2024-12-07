@@ -1,1 +1,26 @@
+Que 1) List the top 3 and bottom 3 makers for the fiscal years 2023 and 2024 in
+-- terms of the number of 2-wheelers sold.
 
+query :- top 3 
+select s.maker , sum(electric_vehicles_sold) as sold_quantity
+from electric_vehicle_sales_by_makers s
+JOIN dim_date d
+on d.date = s.date
+where d.fiscal_year in(2023,2024)
+and s.vehicle_category = "2-wheelers"
+group by s.maker 
+order by  sold_quantity desc
+limit 3;
+
+bottom 3 
+select s.maker , sum(electric_vehicles_sold) as sold_quantity
+from electric_vehicle_sales_by_makers s
+JOIN dim_date d
+on d.date = s.date
+where d.fiscal_year in(2023,2024)
+and s.vehicle_category = "2-wheelers"
+group by s.maker 
+order by  sold_quantity asc
+limit 3; 
+
+Que 2) 
