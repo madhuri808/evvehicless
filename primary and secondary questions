@@ -1,5 +1,5 @@
 Que 1) List the top 3 and bottom 3 makers for the fiscal years 2023 and 2024 in
--- terms of the number of 2-wheelers sold.
+ terms of the number of 2-wheelers sold.
 
 query :- top 3 
 select s.maker , sum(electric_vehicles_sold) as sold_quantity
@@ -23,4 +23,9 @@ group by s.maker
 order by  sold_quantity asc
 limit 3; 
 
-Que 2) 
+Que 2) Identify the top 5 states with the highest penetration rate in 2-wheeler
+and 4-wheeler EV sales in FY 2024.
+
+query :- 
+
+
