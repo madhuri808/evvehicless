@@ -151,7 +151,41 @@ Select c.maker, c.EV_Sales2024, p.EV_Sales2022,
 
 
 que 7) List down the top 10 states that had the highest compounded annual growth rate (CAGR) from 2022 to 2024 in total vehicles sold. 
-query :- 
+query :- With CAGR_FY2024 as
+	(
+    Select s.state, sum(total_vehicles_sold) as EV_Sales2024
+	from electric_vehicle_sales_by_state s
+    Join dim_date d
+    on s.date = d.date
+    Where d.fiscal_year = 2024
+    Group by s.state
+    ),
+ CAGR_FY2022 as 
+	(
+    Select s.state, sum(total_vehicles_sold) as EV_Sales2022
+	from electric_vehicle_sales_by_state s
+    Join dim_date d
+    on s.date = d.date
+    Where d.fiscal_year = 2022
+    Group by s.state
+    )
+Select c.state, c.EV_Sales2024, p.EV_Sales2022,
+	Case 
+		When p.EV_Sales2022>0 Then
+			Round((power(c.EV_Sales2024  / p.EV_Sales2022, 1/2)-1) * 100,2)
+				Else 
+					Null
+						End as CAGR_Maker_Percent
+	From CAGR_FY2024 c
+    Join  CAGR_FY2022 p
+    on c.state = p.state
+    order by CAGR_Maker_Percent DESC
+    Limit 10;
+
+Que 8)What are the peak and low season months for EV sales based on the data from 2022 to 2024? 
+
+query :-
+
 
 
 
