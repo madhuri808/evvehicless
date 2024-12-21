@@ -150,3 +150,9 @@ Select c.maker, c.EV_Sales2024, p.EV_Sales2022,
     Limit 5;
 
 
+que 7) List down the top 10 states that had the highest compounded annual growth rate (CAGR) from 2022 to 2024 in total vehicles sold. 
+query :- 
+
+
+
+
