@@ -196,16 +196,7 @@ query :- With New_Dim_Date as
         On n.date = m.date
         Where n.fiscal_year in (2022 , 2023 , 2024)
         Group by n.Month_Name
-        Order by EV_Sales DESC
-
-que 9)What is the projected number of EV sales (including 2-wheelers and 4wheelers) for the top 10 states by penetration rate in 2030, 
-based on the compounded annual growth rate (CAGR) from previous years? 
-
-query :- 
-  
-
-
-
+        Order by EV_Sales DESC;
 
 
 
